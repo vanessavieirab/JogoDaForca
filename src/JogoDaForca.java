@@ -20,9 +20,9 @@ public class JogoDaForca {
 	private int acertos; // total de acertos do jogo
 	private int erros = 0; // total de erros do jogo
 	private String letrasUsadas = "";
-	private String[] penalidades = { "perna", "perna", "braÁo", "braÁo", "tronco", "cabeÁa" };
+	private String[] penalidades = { "perna", "perna", "bra√ßo", "bra√ßo", "tronco", "cabe√ßa" };
 
-	public JogoDaForca(String nomearquivo) throws Exception { // construtor que lÍ o arquivo com as N palavras e dicas e as coloca nos
+	public JogoDaForca(String nomearquivo) throws Exception { // construtor que l√™ o arquivo com as N palavras e dicas e as coloca nos
 															  // respectivos arrays.
 		Scanner arquivo = null;
 		String separador = "";
@@ -56,9 +56,9 @@ public class JogoDaForca {
 		this.palavra = palavras[indice];
 	}
 
-	public boolean adivinhou(String letra) throws Exception { // retorna true, caso a letra exista dentro da palavra sorteada e retorna false, caso contr·rio.
-															 // AlÈm disso, o mÈtodo marca as posiÁıes encontradas e contabiliza X acertos para as X ocorrÍncias
-															// da letra encontrada dentro da palavra ou contabiliza 1 erro para a inexistÍncia da letra na palavra.
+	public boolean adivinhou(String letra) throws Exception { // retorna true, caso a letra exista dentro da palavra sorteada e retorna false, caso contr√°rio.
+															 // Al√©m disso, o m√©todo marca as posi√ß√µes encontradas e contabiliza X acertos para as X ocorr√™ncias
+															// da letra encontrada dentro da palavra ou contabiliza 1 erro para a inexist√™ncia da letra na palavra.
 		Pattern padrao = Pattern.compile("[a-zA-Z]");
 		Matcher alvo = padrao.matcher(letra);
 		
@@ -74,7 +74,7 @@ public class JogoDaForca {
 			}
 			
 			if(this.letrasUsadas.indexOf(letra)>=0){
-				throw new Exception("VocÍ j· tentou a letra "+letra);
+				throw new Exception("Voc√™ j√° tentou a letra "+letra);
 			} else {
 				this.letrasUsadas += letra;
 			}
@@ -83,7 +83,7 @@ public class JogoDaForca {
 				palavra2 = "";
 				for (int j = 0; j < this.palavra.length(); j++) {
 					palavra2 += this.letrasUsadas.indexOf(this.palavra.charAt(j)) >= 0 ? this.palavra.charAt(j) : "*";
-				}	//se a condiÁ„o for verdadeira palavra2 recebe a letra, se n„o for, continua com *
+				}	//se a condi√ß√£o for verdadeira palavra2 recebe a letra, se n√£o for, continua com *
 			}
 			
 			if(!this.palavra.contains(letra)){
@@ -97,7 +97,7 @@ public class JogoDaForca {
 
 	public boolean terminou() { // retorna true, se o total de acertos atingir o total de letras da palavra
 								// sorteada ou se o total de erros atingir seis.
-		if ((this.erros == 6) || (this.acertos == 6)) {
+		if ((this.erros == 6) || (this.acertos == this.palavra.length())) {
 			return true;
 		} 
 		else {
@@ -106,7 +106,7 @@ public class JogoDaForca {
 	}
 
 	public String getPalavra() { // retorna a palavra sorteada com as letras adivinhadas reveladas e com as
-								// letras n„o adivinhadas escondidas com ì*î.
+								// letras n√£o adivinhadas escondidas com ‚Äú*‚Äù.
 		return palavra2;
 	}
 
@@ -139,11 +139,11 @@ public class JogoDaForca {
 		return this.erros;
 	}
 
-	public String getResultado() { // retorna ìganhou o jogoî ou ìvocÍ foi enforcadoî
-		if (this.acertos == 6) {
-			return "VocÍ ganhou o jogo!";
+	public String getResultado() { // retorna ‚Äúganhou o jogo‚Äù ou ‚Äúvoc√™ foi enforcado‚Äù
+		if (this.acertos == this.palavra.length()) {
+			return "Voc√™ ganhou o jogo!";
 		} else {
-			return "VocÍ foi enforcado!";
+			return "Voc√™ foi enforcado!";
 		}
 	}
 }
